@@ -35,7 +35,7 @@ public class Graph {
 
 	/**
 	 * build a graph from a text File
-	 * @param path text file path
+	 * @param path : text file path
 	 * @throws FileNotFoundException
 	 */
 	public Graph(String path) throws FileNotFoundException {
@@ -73,6 +73,11 @@ public class Graph {
 		node_list = res;
 	}
 
+	/**
+	 * load a graph from a text File
+	 * @param path : text file path
+	 * @throws FileNotFoundException
+	 */
 	public void load(String path) throws FileNotFoundException {
 		Scanner myReader = new Scanner(new File(path));
 		String data;
@@ -115,6 +120,11 @@ public class Graph {
 		myReader.close();
 	}
 
+	/**
+	 * save a graph to a text file
+	 * @param path : text file path
+	 * @throws IOException
+	 */
 	public void save(String path) throws IOException {
 		FileWriter myWriter = new FileWriter(path);
 
@@ -139,6 +149,10 @@ public class Graph {
 		myWriter.close();
 	}
 
+	/**
+	 * graph to string :
+	 * Node.toString()
+	 */
 	public String toString() {
 
 		StringBuilder sb = new StringBuilder();
@@ -148,10 +162,16 @@ public class Graph {
 		return sb.toString();
 	}
 
+	/**
+	 * @return int : number of Node of the graph
+	 */
 	public int getSize() {
 		return this.node_list.size();
 	}
 
+	/**
+	 * @return list of Node of the graph
+	 */
 	public ArrayList<Node> getList() {
 		return this.node_list;
 	}

@@ -2,24 +2,10 @@ package test;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import core.Node;
-import core.graph.ChainGraph;
 import core.graph.Graph;
 import core.graph.RandomGraph;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.Color;
 
 import utils.Combination_generator;
 import utils.Independant_set_detector;
