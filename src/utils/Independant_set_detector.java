@@ -41,11 +41,12 @@ public class Independant_set_detector {
 		for (int[] t : tab) {
 			ArrayList<Node> listInde = Common_methods.transform(t, g);
 			ArrayList<Node> alist = Common_methods.reverseMIS(listInde, g);
-			boolean isMaxInde = true;
+			boolean isMaxInde;
 			boolean isBad = false;
 			for (Node n : alist) {
+				isMaxInde = true;
 				for (Node neigh : n.getNeighbors()) {
-					if (!Common_methods.isIn(neigh, listInde)) {
+					if (Common_methods.isIn(neigh, listInde)) {
 						isMaxInde = false; // false car n pourrait etre dans
 											// l'ensemble de point independant
 					}

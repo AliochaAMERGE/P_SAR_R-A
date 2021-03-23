@@ -5,4 +5,4 @@ PSAR : Heuristiques pour la construction de MIS robustes
 Projet Master 1 2021 Sorbonne Université
 
 Aliocha AMERGÉ
-Barthélémy ROBIN
+Barthélémy ROBINon voit le TME pendant le TD d'AR ?

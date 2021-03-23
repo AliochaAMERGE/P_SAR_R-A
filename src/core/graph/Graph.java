@@ -47,25 +47,25 @@ public class Graph {
 		// ce constructeur sert a la creation des graphs de test
 		// TODO trouver une meilleure implementation pour les tests
 		ArrayList<Node> res = new ArrayList<Node>();
+		ArrayList<Node> intermediaire = new ArrayList<Node>();
+		for(Node node : g.getList()) {
+			intermediaire.add(new Node(node.getId()));
+		}
+		Node resnode;
 		for (Node node : g.getList()) {
-			Node resnode;
 			if (node.getId() == n.getId()) {
-				resnode = new Node(n.getId());
-				for (Node n_neigh : n.getNeighbors()) {
+				resnode = intermediaire.get(node.getId());
+				for (Node n_neigh : node.getNeighbors()) {
 					if (!Common_methods.isIn(n_neigh, alist)) {
-						resnode.addNeighbor(n_neigh);
+						resnode.addNeighborUnidirectionnel(intermediaire.get(n_neigh.getId()));
 					}
 				}
 			} else {
-				if (Common_methods.isIn(node, alist)) {
-					resnode = new Node(node.getId());
-					for (Node n_neigh : node.getNeighbors()) {
-						if (n_neigh.getId() != n.getId()) {
-							resnode.addNeighbor(n_neigh);
-						}
+				resnode = intermediaire.get(node.getId());
+				for (Node n_neigh : node.getNeighbors()) {
+					if (/*n_neigh.getId() != n.getId() &&*/ !Common_methods.isIn(node, alist)) {
+						resnode.addNeighborUnidirectionnel(intermediaire.get(n_neigh.getId()));//
 					}
-				} else {
-					resnode = node;
 				}
 			}
 			res.add(resnode);
@@ -157,7 +157,7 @@ public class Graph {
 
 		StringBuilder sb = new StringBuilder();
 		for (Node n : node_list) {
-			sb.append(n.toString() + "\n");
+			sb.append(n.toString() + ",");
 		}
 		return sb.toString();
 	}
@@ -175,4 +175,17 @@ public class Graph {
 	public ArrayList<Node> getList() {
 		return this.node_list;
 	}
+	
+	public boolean isBipartite() { // interet : tester la propriété enoncé et ca s'avère juste : is biparti -> robust
+		return false;
+	}
+	
+	public boolean isSputnik() { // interet : tester la propriété enoncé et ca s'avère juste : is sputnik -> robust
+		return false;
+	}
 }
+
+
+
+
+

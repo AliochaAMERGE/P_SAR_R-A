@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import core.Node;
 import core.graph.Graph;
@@ -8,15 +9,13 @@ import core.graph.Graph;
 public class Combination_generator {
 
 	private static Graph g;
+	private static int complex;
 
-	public static ArrayList<int[]> combinaison(ArrayList<Node> nodes,
-			Graph graph) {
-		// cette fonction renvoie une arraylist contenant des tableaux d'int
-		// correspondant, chacune a un ensemble stable du graphe
+	public static ArrayList<int[]> combinaison(ArrayList<Node> nodes,Graph graph) {
+		// cette fonction renvoie une arraylist contenant des tableaux d'int correspondant, chacune a un ensemble stable du graphe
 
-		// for each combination of nodes in our graph, check if the combination
-		// is an
-		// independent set
+		// for each combination of nodes in our graph, check if the combination is an independent set
+		complex = 0;
 		g = graph;
 		long startTime = System.nanoTime();
 		int[] a = new int[nodes.size()];
@@ -35,20 +34,21 @@ public class Combination_generator {
 
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime);
-		System.out.println("le calcul de combinaison a pris : "
-				+ duration / 1000000000 + " sec(s)");
+		System.out.println("le calcul de combinaison a pris : "+ duration / 1000000000 + " sec(s) et complex = "+complex);
 		return tout;
 	}
 
-	public static void inter(int n, int[] source, int[] en_cours,
-			ArrayList<int[]> tout) {
+	public static void inter(int n, int[] source, int[] en_cours,ArrayList<int[]> tout) {
 		// fonction recurcive appeleé par la fonction combinaison
+		complex++;
+		//System.out.println(Arrays.toString(en_cours));
 		if (n == 0) {
 			if (en_cours.length > 0) {
 				if (Independant_set_detector.detectStable(en_cours, g)) {
 					tout.add(en_cours);
 				}
 			}
+			//System.out.println("katchink");
 			return;
 		}
 		for (var j = 0; j < source.length; j++) {

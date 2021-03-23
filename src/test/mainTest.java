@@ -3,10 +3,10 @@ package test;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import core.Node;
+import core.graph.CycleGraph;
 import core.graph.Graph;
 import core.graph.RandomGraph;
-
-
+import core.graph.TreeGraph;
 import utils.Combination_generator;
 import utils.Independant_set_detector;
 import utils.Robustess_detector;
@@ -19,7 +19,16 @@ public class mainTest {
 	public static void main(String[] args) throws FileNotFoundException
 	{
 		// g = new Graph();
-		g = new RandomGraph(10);
+		g = new CycleGraph(8);
+		
+		/* 
+		 * test sur chacun des graphes en fonctions de leur taille et potentiellement de leur parametre (arbre taille)
+		 * test : temps, fiabilité 
+		 * etudes des resultats
+		 * en fonction du type de graph combien de MIS/ combien sont robustes
+		 * qu'est ce qui permettrait a l'algo d'etre plus efficace dans en fonction du type de graph
+		 * étude de la complexité
+		 */
 //		g.load("src/testgraph2.txt");
 		System.out.println("Graph Loaded");
 		System.out.println(g);
@@ -43,14 +52,14 @@ public class mainTest {
 		 * for(ArrayList<Node> list : MIS) { System.out.println(list.size()+" "+ MIS); }
 		 */
 		// System.out.println(Independant_set_detector.getMSI(tab_stable,g));
-		for (ArrayList<Node> list : MIS)
+		/*for (ArrayList<Node> list : MIS)
 		{
 			for (Node node : list)
 			{
 				//System.out.print(node.getId() + " ");
 			}
 			//System.out.println();
-		}
+		}*/
 		Robustess_detector.testCut(MIS, g);
 
 		// PROTOTYPE D'AFFICHAGE GRAPHIQUE

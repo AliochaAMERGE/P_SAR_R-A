@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import core.Node;
 
 /**
- * a chained graph
+ * a cycle graph
  *
  */
 public class CycleGraph extends Graph {

@@ -46,13 +46,14 @@ public class Node {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(id);
-		sb.append(": ");
+		/*sb.append(": ");
 		for (Node n : neighbors) {
 			sb.append(" " + n.getId());
-		}
+		}*/
 		return sb.toString();
 	}
-
+	
+	
 	/**
 	 * add a neighbor to the list
 	 * and add current node to neighbor's list
@@ -61,16 +62,11 @@ public class Node {
 	 */
 	public void addNeighbor(Node n) {
 		neighbors.add(n);
-		n.addNeighbor_helper(this);
+		n.neighbors.add(this);
 	}
 	
-	/**
-	 * add current Node to neighbor's list
-	 * helper of addNeighbor
-	 * @param neighbor : Node -> a new neighbor
-	 */
-	public void addNeighbor_helper(Node neighbor) {
-		neighbors.add(neighbor);
+	public void addNeighborUnidirectionnel(Node n) {
+		neighbors.add(n);
 	}
 
 	/**

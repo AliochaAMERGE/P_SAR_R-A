@@ -8,12 +8,16 @@ import core.graph.Graph;
 public class Robustess_detector {
 
 	public static void testCut(ArrayList<ArrayList<Node>> aalist, Graph g) {
+		int mistot = 0;
+		int misrob = 0;
 		// prend en parametre la liste de mis. puis cré un graph specifique de
 		// test pour
 		// chacun des nodes faibles. ces grapes sont alors testé
 
 		for (ArrayList<Node> list : aalist) {
 			ArrayList<Node> reverselist = Common_methods.reverseMIS(list, g);
+
+			boolean isMISrobust = true;
 			for (Node n : reverselist) {
 				ArrayList<Node> listgraph = new ArrayList<Node>();
 				for (Node n_neigh : n.getNeighbors()) {
@@ -24,14 +28,24 @@ public class Robustess_detector {
 						listgraph.add(n_neigh);
 					}
 				}
-				Graph graph = new Graph(g, n, listgraph);// on genere un nouveau
-															// graph sans les
-															// connections pour
-															// le test
-				System.out.println(graph);
-				System.out.println("" + isLinked(n, graph.getList()) + "\n\n");
+				Graph graph = new Graph(g, n, listgraph);// on genere un nouveau graph sans les connections pour le test
+				//System.out.println(graph);//"\ng : "+g+"\nn : "+n+"\nlistgraph : "+listgraph+"\n"+
+				//System.out.println("" + isLinked(n, graph.getList())); // if isLinked true -> le MIS n'est pas robuste
+				if(isLinked(n,graph.getList())) {
+					isMISrobust = false;
+					break;
+				}
+				
 			}
+			if(isMISrobust) {
+				System.out.println("on a un MIS robust, avec comme point : "+list+" dans le graph : "+g);
+				misrob++;
+			}else{
+				System.out.println("le MIS n'est pas robuste, avec comme point : "+list+" dans le graph : "+g);
+			}
+			mistot++;
 		}
+		System.out.println("le ratio MIS possible MIS robuste :"+misrob+"/"+mistot);
 	}
 
 	public static boolean isLinked(Node node, ArrayList<Node> list) {
@@ -55,21 +69,19 @@ public class Robustess_detector {
 			voisin_a_voir.add(neigh);
 		}
 		if (voisin_a_voir.isEmpty()) {
-			System.out.println("ke");
+			//System.out.println("ke");
 			return false;
 		}
 		while (!voisin_a_voir.isEmpty()) {
 			for (Node neigh : voisin_a_voir.get(0).getNeighbors()) {
-				if (!Common_methods.isIn(neigh, voisin_a_voir)
-						&& !Common_methods.isIn(neigh, voisin_vu)) {
+				if (!Common_methods.isIn(neigh, voisin_a_voir) && !Common_methods.isIn(neigh, voisin_vu)) {
 					voisin_a_voir.add(neigh);
 				}
 			}
 			voisin_vu.add(voisin_a_voir.remove(0));
 		}
-		// a ce stade voisin_vu represente l'arraylist des nodes connecté au
-		// node n. on
-		// a juste a la comparer avec la liste des nodes du graph.
+		// A ce stade voisin_vu represente l'arraylist des nodes connecté au node n. 
+		// On a juste à la comparer avec la liste des nodes du graph.
 		boolean ispresent;
 		for (Node node_graph : list) {
 
@@ -81,7 +93,7 @@ public class Robustess_detector {
 				}
 			}
 			if (ispresent == false) {
-				System.out.println("there is a cut");
+				//System.out.println("there is a cut");
 				return false;
 			}
 		}
