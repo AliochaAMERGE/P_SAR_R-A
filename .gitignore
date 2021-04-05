@@ -1,0 +1,8 @@
+.project
+.classpath
+/.vscode
+/.settings
+pom.xml
+/bin
+/target
+/GrapheTest
