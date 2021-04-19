@@ -6,7 +6,8 @@ import core.Node;
 
 /**
  * a chained graph
- *
+ * built simply by adding vertices 
+ * between every points two by two until a cycle is made
  */
 public class CycleGraph extends Graph {
 

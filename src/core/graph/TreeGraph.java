@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import core.Node;
 
+/**
+ * a tree is an acyclic and connected graph.
+ * 
+ */
+
 public class TreeGraph extends Graph {
 	public TreeGraph(int nb_nodes) { // peut prendre en param le nombre de branche max : int nb_branches
 		ArrayList<Node> res = new ArrayList<Node>();

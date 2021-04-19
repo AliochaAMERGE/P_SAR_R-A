@@ -15,7 +15,7 @@ import utils.Common_methods;
 
 /**
  * a graph defined by a list of Nodes objects
- *
+ * most of graph's utilities are defined here
  */
 public class Graph {
 

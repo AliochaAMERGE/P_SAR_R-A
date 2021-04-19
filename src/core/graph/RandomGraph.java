@@ -6,6 +6,13 @@ import core.Node;
 import utils.Common_methods;
 import utils.Robustess_detector;
 
+/**
+ * a graph randomly generated
+ * we add vertices between two nodes until it is connected
+ * issue, most of the graphs made are tree, 
+ * so we redifined this graph in RandomGraphDense based on the density instead.
+ */
+
 public class RandomGraph extends Graph {
 
 	public RandomGraph(int nb_nodes) {

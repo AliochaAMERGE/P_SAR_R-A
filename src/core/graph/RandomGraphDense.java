@@ -6,6 +6,14 @@ import core.Node;
 import utils.Common_methods;
 import utils.Robustess_detector;
 
+/**
+ * a random graph based on the density of a graph
+ * density = (2 * |E|) / (|V| * (|V| - 1))
+ * E the Edges, V the vertices
+ * we add a certain number of vertices until the density desired is reached,
+ * if the graph is bit connected at the end, we manually add the desired vertices
+ */
+
 public class RandomGraphDense extends Graph {
 	public RandomGraphDense(int nb_nodes, double min) {
 		node_list = RandomGraphGenerator(nb_nodes, min);

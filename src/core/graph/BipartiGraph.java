@@ -6,6 +6,17 @@ import core.Node;
 import utils.Common_methods;
 import utils.Robustess_detector;
 
+/**
+ * A complete bipartite graph is a graph G = (V1 U V2, E) such that V1 inter V2 = null
+ * and E = {{v1, v2}, v1 € V1 and v2 € V2}
+ */
+
+/**
+ * The graph is built the following way :
+ * we divide the graph's node into two non-empty lists
+ * we add vertices between these nodes (one from each sets)
+ * until the graph is connected.
+ */
 public class BipartiGraph extends Graph{
 	public BipartiGraph(int nb_nodes) {
 		node_list = BipartiGraphGenerator(nb_nodes, 5);

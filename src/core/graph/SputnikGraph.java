@@ -6,6 +6,15 @@ import core.Node;
 import utils.Common_methods;
 import utils.Robustess_detector;
 
+/**
+ * A graph is a sputnik if and only if every vertex v belonging to a cycle 
+ * has at least one pendant neighbor.
+ * 
+ * the graph is build the following way:
+ * half of the nodes are used in order to make a random graph.
+ * the remaining half are used to add "antenas" to the graph.
+ */
+
 public class SputnikGraph extends Graph {
 	public SputnikGraph(int nb_nodes) {
 		node_list = SputnikGraphGenerator(nb_nodes);
