@@ -45,4 +45,27 @@ public class Common_methods {
 		}
 		return res;
 	}
+
+	public static int[] reverseArray(int[] list, Graph g) {
+		// renvoie une arraylist composée de tout les nodes n'appartenant pas a
+		// l'ensemble de point stable
+		int taille = (g.getList().size() - list.length);
+		int res[] = new int[taille];
+		boolean bool;
+		int cpt = 0;
+		for (Node n : g.getList()) {
+			bool = true;
+			for (int i : list) {
+				if (i == n.getId()) {
+					bool = false;
+					break;
+				}
+			}
+			if (bool) {
+				res[cpt++] = n.getId();
+			}
+
+		}
+		return res;
+	}
 }

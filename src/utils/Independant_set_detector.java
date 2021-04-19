@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import core.Node;
 import core.graph.Graph;
@@ -28,14 +29,12 @@ public class Independant_set_detector {
 		return true;
 	}
 
-	public static ArrayList<ArrayList<Node>> getMIS(ArrayList<int[]> tab,
-			Graph g) {
-		// TODO modif pas maximum mais maximal
+	public static ArrayList<ArrayList<Node>> getMIS(ArrayList<int[]> tab, Graph g) {
 		ArrayList<ArrayList<Node>> res = new ArrayList<ArrayList<Node>>();
 		/*
-		 * int length = 0; for (int[] t : tab) { if (t != null && t.length >
-		 * length) { length = t.length; } } for (int[] a : tab) { if (a != null
-		 * && a.length == length) { res.add(transform(a, g)); } }
+		 * int length = 0; for (int[] t : tab) { if (t != null && t.length > length) {
+		 * length = t.length; } } for (int[] a : tab) { if (a != null && a.length ==
+		 * length) { res.add(transform(a, g)); } }
 		 */
 
 		for (int[] t : tab) {
@@ -64,33 +63,44 @@ public class Independant_set_detector {
 		return res;
 	}
 
-	public static boolean isIndependant(ArrayList<Node> list) {
+	public static boolean isIndependant(int[] tab, Graph g) {
 		// Check every node, if one of their neighbor is in the set, return
 		// false, else return true
-		if (list == null) {
-			return false;
-		}
-		for (Node n : list) {
-			for (Node n_n : n.getNeighbors()) {
 
-				if (list.contains(n_n))
+		for (int n : tab) {
+			for (Node n_n : g.getNode(n).getNeighbors()) {
+				if (Arrays.binarySearch(tab, n_n.getId()) >= 0)
 					return false;
+
 			}
 		}
 		return true;
 	}
 
-	/*
-	 * public static int [][] detectStable(int[][] tab, Graph g){ int [][] res =
-	 * new int[tab.length][]; for(int i = 0; i < tab.length; i++) {
-	 * if(isIndependant(transform(tab[i], g))){ res[i]=tab[i]; }else { res[i]=
-	 * null; } } return res; // TEST 1 }
-	 */
+	public static boolean getMISOneRes(int[] tab, Graph g) {
+		ArrayList<Node> res = new ArrayList<Node>();
 
-	public static boolean detectStable(int[] tab, Graph g) {
-		if (isIndependant(Common_methods.transform(tab, g))) {
+		ArrayList<Node> listInde = Common_methods.transform(tab, g);
+		ArrayList<Node> alist = Common_methods.reverseMIS(listInde, g);
+		boolean isMaxInde;
+		boolean isBad = false;
+		for (Node n : alist) {
+			isMaxInde = true;
+			for (Node neigh : n.getNeighbors()) {
+				if (Common_methods.isIn(neigh, listInde)) {
+					isMaxInde = false; // false car n pourrait etre dans
+										// l'ensemble de point independant
+				}
+			}
+			if (isMaxInde == true) {
+				isBad = true;
+				break;
+			}
+		}
+		if (isBad == false) {
 			return true;
 		}
+
 		return false;
 	}
 }
