@@ -10,12 +10,13 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+
 import core.Node;
 import utils.Common_methods;
 
 /**
  * a graph defined by a list of Nodes objects
- * most of graph's utilities are defined here
+ *
  */
 public class Graph {
 
@@ -67,7 +68,7 @@ public class Graph {
 			} else {
 				resnode = intermediaire.get(node.getId());
 				for (Node n_neigh : node.getNeighbors()) {
-					if (!Common_methods.isIn(node, alist)) {
+					if (/* n_neigh.getId() != n.getId() && */ !Common_methods.isIn(node, alist)) {
 						resnode.addNeighborUnidirectionnel(intermediaire.get(n_neigh.getId()));//
 					}
 				}
@@ -97,6 +98,7 @@ public class Graph {
 			node_list.add(new Node(Integer.parseInt(str)));
 		}
 		System.out.print("\n");
+		// list=temp;
 
 		// read node's neighbor
 		int cptligne = 0, cptcol;
@@ -218,6 +220,47 @@ public class Graph {
 		return true;
 	}
 
+	public boolean isBipartiComplet() {
+
+		if (node_list.size() == 1 || node_list.size() == 2) {
+			return true;
+		}
+		// noeud init
+		Node start = node_list.get(0);
+
+		List<Node> right = new ArrayList<Node>();
+		List<Node> left = new ArrayList<Node>();
+
+		right.add(start);
+		for (Node n_n : start.getNeighbors()) {
+			// Supposons aucun doublons chez les voisins
+			left.add(n_n);
+		}
+		start = left.get(0);
+		for (Node n_n : start.getNeighbors()) {
+			if (right.contains(n_n) && n_n != right.get(0)) {
+				return false;
+			} else if (!left.contains(n_n) && !right.contains(n_n)) {
+				right.add(n_n);
+			}
+		}
+		// maintenant nous pourrions verifié chaque voisins de chaque noeuds de droite
+		// ou gauche, et verifié qu'il est present dans gauche resp. droite
+		// Ou nous pourrions verifié avec le nombres de voisins, ce dernier doit etre
+		// egal au nombre d'element de l'ensemble opposé
+		for (Node n : right) {
+			if (n.getNeighbors().size() != left.size()) {
+				return false;
+			}
+		}
+		for (Node n : left) {
+			if (n.getNeighbors().size() != right.size()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public Node getNode(int num) {
 		return node_list.get(num);
 	}
@@ -253,7 +296,6 @@ public class Graph {
 					avoir.add(init);
 				}
 			}
-			// avoir.addAll(pdd.getNeighbors());
 			while (!avoir.isEmpty()) {
 				for (Node neigh : avoir.get(0).getNeighbors()) {
 					if (!vu.contains(neigh) && !avoir.contains(neigh)) {
@@ -293,6 +335,8 @@ public class Graph {
 
 			// a negative integer, zero, or a positive integer as the first argument is less
 			// than, equal to, or greater than the second.
+			// return
+			// (n1.getValue()/n1.getNeighbors().size())-(n2.getValue()/n2.getNeighbors().size());
 			return (n1.getValue() / n1.getNeighbors().size()) - (n2.getValue() / n2.getNeighbors().size());
 		}
 
@@ -313,4 +357,55 @@ public class Graph {
 		Collections.sort(node_list, new compa2());
 	}
 
+	public class compaREVERSE implements Comparator<Node> {
+
+		@Override
+		public int compare(Node n1, Node n2) {
+
+			// a negative integer, zero, or a positive integer as the first argument is less
+			// than, equal to, or greater than the second.
+			return n2.getNeighbors().size() - n1.getNeighbors().size();
+		}
+
+	}
+
+	public void optimizeREVERSE() {
+		Collections.sort(node_list, new compaREVERSE());
+	}
+
+	public class compa2REVERSE implements Comparator<Node> {
+
+		@Override
+		public int compare(Node n1, Node n2) {
+
+			// a negative integer, zero, or a positive integer as the first argument is less
+			// than, equal to, or greater than the second.
+			return (n2.getValue() / n2.getNeighbors().size()) - (n1.getValue() / n1.getNeighbors().size());
+		}
+
+	}
+
+	public void optimizeMISREVERSE(ArrayList<Node> list) {
+		int cpt;
+		for (Node n : node_list) {
+			cpt = 0;
+			for (Node neigh : n.getNeighbors()) {
+				if (list.contains(neigh)) {
+					cpt++;
+				}
+			}
+			n.setValue(cpt);
+
+		}
+		Collections.sort(node_list, new compa2REVERSE());
+	}
+
+	public boolean isCycle() {
+		for (Node n : node_list) {
+			if (n.getNeighbors().size() != 2) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

@@ -7,46 +7,7 @@ import core.graph.Graph;
 
 public class Robustess_detector {
 
-	public static void testCut(ArrayList<ArrayList<Node>> aalist, Graph g) {
-		int mistot = 0;
-		int misrob = 0;
-		// prend en parametre la liste de mis. puis cré un graph specifique de
-		// test pour
-		// chacun des nodes faibles. ces grapes sont alors testé
-
-		for (ArrayList<Node> list : aalist) {
-			ArrayList<Node> reverselist = Common_methods.reverseMIS(list, g);
-
-			boolean isMISrobust = true;
-			for (Node n : reverselist) {
-				ArrayList<Node> listgraph = new ArrayList<Node>();
-				for (Node n_neigh : n.getNeighbors()) {
-					// creation de l'arraylist constitué des points fort voisin
-					// de n utilisé dans le
-					// constructeur pour pouvoir cree un graph test
-					if (Common_methods.isIn(n_neigh, list)) {
-						listgraph.add(n_neigh);
-					}
-				}
-				Graph graph = new Graph(g, n, listgraph);// on genere un nouveau graph sans les connections pour le test
-				if (isLinked(n, graph.getList())) {
-					isMISrobust = false;
-					break;
-				}
-
-			}
-			if (isMISrobust) {
-				System.out.println("on a un MIS robust, avec comme point : " + list + " dans le graph : " + g);
-				misrob++;
-			} else {
-				System.out.println("le MIS n'est pas robuste, avec comme point : " + list + " dans le graph : " + g);
-			}
-			mistot++;
-		}
-		System.out.println("le ratio MIS possible MIS robuste :" + misrob + "/" + mistot);
-	}
-
-	public static boolean testCutOneRes(int[] aalist, Graph g) {
+	public static boolean isRobust(int[] aalist, Graph g) {
 		// prend en parametre la liste de mis. puis cré un graph specifique de
 		// test pour
 		// chacun des nodes faibles. ces grapes sont alors testé
@@ -57,20 +18,21 @@ public class Robustess_detector {
 		for (Node n : reverselist) {
 			ArrayList<Node> listgraph = new ArrayList<Node>();
 			for (Node n_neigh : n.getNeighbors()) {
-				// creation de l'arraylist constitué des points fort voisin
-				// de n utilisé dans le
+				// creation de l'arraylist constitué des points fort voisin de n utilisé dans le
 				// constructeur pour pouvoir cree un graph test
+
 				if (Common_methods.isIn(n_neigh, list)) {
 					listgraph.add(n_neigh);
 				}
 			}
-			Graph graph = new Graph(g, n, listgraph);// on genere un nouveau graph sans les connections pour le test
+			Graph graph = new Graph(g, n, listgraph);
+			// on genere un nouveau graph sans les connections pour le test
 			if (isLinked(n, graph.getList())) {
 				isMISrobust = false;
 				break;
 			}
-
 		}
+		// return isMISrobust;
 		if (isMISrobust) {
 			return true;
 		} else {
@@ -92,7 +54,8 @@ public class Robustess_detector {
 			}
 		}
 		if (n == null) {
-			System.err.println("dans Robustess_detector.isLinked, node n'appatient pas a list");
+			// node n'appatient pas a list
+			return false;
 		}
 		for (Node neigh : n.getNeighbors()) {
 			voisin_a_voir.add(neigh);
@@ -115,6 +78,7 @@ public class Robustess_detector {
 
 			ispresent = false;
 			for (Node node_vu : voisin_vu) {
+				// if(isIn(node_vu, g.getList()){ispresent = true;}
 				if (node_vu.getId() == node_graph.getId()) {
 					ispresent = true;
 				}
