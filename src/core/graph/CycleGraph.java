@@ -21,6 +21,7 @@ public class CycleGraph extends Graph {
 
 	/**
 	 * utilitaire du constructeur
+	 * 
 	 * @param length le nombre de noeud du graphe
 	 * @return le Cycle
 	 */

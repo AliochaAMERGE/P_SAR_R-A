@@ -4,7 +4,15 @@ import java.util.ArrayList;
 
 import core.Node;
 
+/**
+ * Implémentation d'un arbre
+ * un graphe tel qu'il n'existe qu'un unique chemin entre deux noeuds
+ */
 public class TreeGraph extends Graph{
+	/**
+	 * Constructeur d'un arbre
+	 * @param nb_nodes le nombre de noeuds
+	 */
 	public TreeGraph(int nb_nodes) { //peut prendre en param le nombre de branche max : int nb_branches
 		ArrayList<Node> res = new ArrayList<Node>();
 		ArrayList<Node> canope_actuelle = new ArrayList<Node>();

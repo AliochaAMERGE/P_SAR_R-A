@@ -278,8 +278,9 @@ public class Graph {
 
 	/**
 	 * Retourne un noeud en fonction de son id
+	 * 
 	 * @param id
-	 * @return Node 
+	 * @return Node
 	 */
 	public Node getNode(int id) {
 		return node_list.get(id);
@@ -302,8 +303,8 @@ public class Graph {
 	}
 
 	/**
-	 * Utilitaire pour le detecteur de Sputnik
-	 * detecte une antenne (un voisin isolé)
+	 * Utilitaire pour le detecteur de Sputnik detecte une antenne (un voisin isolé)
+	 * 
 	 * @param n un noeud
 	 * @return si le noeud dispose d'un voisin isolé
 	 */
@@ -318,8 +319,9 @@ public class Graph {
 	}
 
 	/**
-	 * Utilitaire pour le detecteur de Sputnik
-	 * vérifie si un noeud est dans une boucle
+	 * Utilitaire pour le detecteur de Sputnik vérifie si un noeud est dans une
+	 * boucle
+	 * 
 	 * @param n un noeud
 	 * @return si le noeud est dans une boucle
 	 */
@@ -350,8 +352,7 @@ public class Graph {
 	}
 
 	/**
-	 * Comparateur pour les Heuristiques de tri 
-	 * Tri en fonction du nombre de voisin
+	 * Comparateur pour les Heuristiques de tri Tri en fonction du nombre de voisin
 	 */
 
 	public class compa implements Comparator<Node> {
@@ -370,15 +371,15 @@ public class Graph {
 	}
 
 	/**
-	 * Heuristique de tri de la liste des noeuds en fonctions du nombre de voisins 
+	 * Heuristique de tri de la liste des noeuds en fonctions du nombre de voisins
 	 */
 	public void optimize() {
 		Collections.sort(node_list, new compa());
 	}
 
 	/**
-	 *  Comparateur pour les Heuristiques de tri
-	 *  tri en fonction du nombre de voisins dans le MIS
+	 * Comparateur pour les Heuristiques de tri tri en fonction du nombre de voisins
+	 * dans le MIS
 	 */
 	public class compa2 implements Comparator<Node> {
 
@@ -396,7 +397,9 @@ public class Graph {
 	}
 
 	/**
-	 * Heuristique de tri de la liste de noeud en fonction du nombre de voisins du MIS
+	 * Heuristique de tri de la liste de noeud en fonction du nombre de voisins du
+	 * MIS
+	 * 
 	 * @param list la liste de noeuds
 	 */
 	public void optimizeMIS(ArrayList<Node> list) {
@@ -459,6 +462,7 @@ public class Graph {
 
 	/**
 	 * Detecteur de Cycle
+	 * 
 	 * @return so le graphe est un cycle
 	 */
 	public boolean isCycle() {

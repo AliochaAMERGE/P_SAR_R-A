@@ -31,7 +31,6 @@ public class Combination_generator {
 		complex = 0;
 		g = graph;
 
-		// g.optimize();//A TESTER
 
 		long startTime = System.nanoTime();
 		int[] a;

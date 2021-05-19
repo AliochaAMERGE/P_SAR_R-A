@@ -13,16 +13,17 @@ import core.Node;
 public class BipartiGraphComplet extends Graph {
 
     /**
-	 * Constructeur d'un graphe biparti Complet
-	 * 
-	 * @param nb_nodes le nombre de noeuds du graphe
-	 */
+     * Constructeur d'un graphe biparti Complet
+     * 
+     * @param nb_nodes le nombre de noeuds du graphe
+     */
     public BipartiGraphComplet(int nb_nodes) {
         node_list = BipartiGraphCompletGenerator(nb_nodes);
     }
 
     /**
      * utilitaire du constructor
+     * 
      * @param nb_nodes nombre de noeuds du graphe
      * @return le graphe biparti complet
      */

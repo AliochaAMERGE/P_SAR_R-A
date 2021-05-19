@@ -101,11 +101,19 @@ public class Node {
 		return false;
 	}
 
+	/**
+	 * Valeurs d'un noeud ?
+	 * @param cpt 
+	 */
 	public void setValue(int cpt) {
 		value = cpt;;
 		
 	}
 
+	/**
+	 * Valeurs d'un noeud ?
+	 * @return
+	 */
 	public int getValue() {
 		return value;
 	}
