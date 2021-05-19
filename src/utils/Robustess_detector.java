@@ -7,6 +7,12 @@ import core.graph.Graph;
 
 public class Robustess_detector {
 
+	/**
+	 * Vérifie la robustesse du MIS testé
+	 * @param aalist 
+	 * @param g
+	 * @return si robuste
+	 */
 	public static boolean isRobust(int[] aalist, Graph g) {
 		// prend en parametre la liste de mis. puis cré un graph specifique de
 		// test pour
@@ -39,6 +45,12 @@ public class Robustess_detector {
 		}
 	}
 
+	/**
+	 * Vérifie la connexité du graphe
+	 * @param node
+	 * @param list
+	 * @return
+	 */
 	public static boolean isLinked(Node node, ArrayList<Node> list) {
 		// cette methode permet de voir si il existe un cheminement d'arrete le
 		// menant jusqu'a tout les autres nodes

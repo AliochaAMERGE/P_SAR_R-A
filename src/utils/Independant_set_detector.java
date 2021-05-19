@@ -25,6 +25,12 @@ public class Independant_set_detector {
 		return true;
 	}
 
+	/**
+	 * Vérifie si l'ensemble testé est un MIS
+	 * @param tab
+	 * @param g
+	 * @return
+	 */
 	public static boolean isMIS(int[] tab, Graph g) {
 
 		ArrayList<Node> listInde = Common_methods.transform(tab, g);
