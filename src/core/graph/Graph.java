@@ -49,8 +49,14 @@ public class Graph {
 		this.load(path);
 	}
 
+	/**
+	 * Constructeur utilitaire pour les tests
+	 * 
+	 * @param g     un graphe
+	 * @param n     un noeud de départ
+	 * @param alist une liste de noeuds
+	 */
 	public Graph(Graph g, Node n, ArrayList<Node> alist) {
-		// ce constructeur sert a la creation des graphs de test
 		ArrayList<Node> res = new ArrayList<Node>();
 		ArrayList<Node> intermediaire = new ArrayList<Node>();
 		for (Node node : g.getList()) {
@@ -68,7 +74,7 @@ public class Graph {
 			} else {
 				resnode = intermediaire.get(node.getId());
 				for (Node n_neigh : node.getNeighbors()) {
-					if (/* n_neigh.getId() != n.getId() && */ !Common_methods.isIn(node, alist)) {
+					if (!Common_methods.isIn(node, alist)) {
 						resnode.addNeighborUnidirectionnel(intermediaire.get(n_neigh.getId()));//
 					}
 				}
@@ -98,7 +104,6 @@ public class Graph {
 			node_list.add(new Node(Integer.parseInt(str)));
 		}
 		System.out.print("\n");
-		// list=temp;
 
 		// read node's neighbor
 		int cptligne = 0, cptcol;
@@ -182,6 +187,11 @@ public class Graph {
 		return this.node_list;
 	}
 
+	/**
+	 * Detecteur de graphe Biparti
+	 * 
+	 * @return true si le graphe est un Biparti false sinon
+	 */
 	public boolean isBiparti() {// interet : tester la propriété enoncé et ca s'avère juste : is bipartite ->
 		// robust
 		if (node_list.size() == 1 || node_list.size() == 2) {
@@ -220,6 +230,11 @@ public class Graph {
 		return true;
 	}
 
+	/**
+	 * Detecteur de graphe Biparti Complet
+	 * 
+	 * @return true si le graphe est un Biparti Complet false sinon
+	 */
 	public boolean isBipartiComplet() {
 
 		if (node_list.size() == 1 || node_list.size() == 2) {
@@ -261,10 +276,20 @@ public class Graph {
 		return true;
 	}
 
-	public Node getNode(int num) {
-		return node_list.get(num);
+	/**
+	 * Retourne un noeud en fonction de son id
+	 * @param id
+	 * @return Node 
+	 */
+	public Node getNode(int id) {
+		return node_list.get(id);
 	}
 
+	/**
+	 * Detecteur de graphe Sputnik
+	 * 
+	 * @return true si le graphe est un graphe Sputnik false sinon
+	 */
 	public boolean isSpoutnik() {
 		for (Node n : node_list) {
 			if (isInABoucle(n)) {
@@ -276,6 +301,12 @@ public class Graph {
 		return true;
 	}
 
+	/**
+	 * Utilitaire pour le detecteur de Sputnik
+	 * detecte une antenne (un voisin isolé)
+	 * @param n un noeud
+	 * @return si le noeud dispose d'un voisin isolé
+	 */
 	private boolean hasALoneNeighbor(Node n) {
 
 		for (Node neigh : n.getNeighbors()) {
@@ -286,6 +317,12 @@ public class Graph {
 		return false;
 	}
 
+	/**
+	 * Utilitaire pour le detecteur de Sputnik
+	 * vérifie si un noeud est dans une boucle
+	 * @param n un noeud
+	 * @return si le noeud est dans une boucle
+	 */
 	public boolean isInABoucle(Node n) {
 		for (Node pdd : n.getNeighbors()) {
 			List<Node> vu = new ArrayList<Node>();
@@ -312,8 +349,16 @@ public class Graph {
 		return false;
 	}
 
+	/**
+	 * Comparateur pour les Heuristiques de tri 
+	 * Tri en fonction du nombre de voisin
+	 */
+
 	public class compa implements Comparator<Node> {
 
+		/**
+		 * Comparateur du nombre de voisin entre deux noeuds
+		 */
 		@Override
 		public int compare(Node n1, Node n2) {
 
@@ -324,24 +369,36 @@ public class Graph {
 
 	}
 
+	/**
+	 * Heuristique de tri de la liste des noeuds en fonctions du nombre de voisins 
+	 */
 	public void optimize() {
 		Collections.sort(node_list, new compa());
 	}
 
+	/**
+	 *  Comparateur pour les Heuristiques de tri
+	 *  tri en fonction du nombre de voisins dans le MIS
+	 */
 	public class compa2 implements Comparator<Node> {
 
+		/**
+		 * comparateur du nombre de voisins dans le MIS
+		 */
 		@Override
 		public int compare(Node n1, Node n2) {
 
 			// a negative integer, zero, or a positive integer as the first argument is less
 			// than, equal to, or greater than the second.
-			// return
-			// (n1.getValue()/n1.getNeighbors().size())-(n2.getValue()/n2.getNeighbors().size());
 			return (n1.getValue() / n1.getNeighbors().size()) - (n2.getValue() / n2.getNeighbors().size());
 		}
 
 	}
 
+	/**
+	 * Heuristique de tri de la liste de noeud en fonction du nombre de voisins du MIS
+	 * @param list la liste de noeuds
+	 */
 	public void optimizeMIS(ArrayList<Node> list) {
 		int cpt;
 		for (Node n : node_list) {
@@ -400,6 +457,10 @@ public class Graph {
 		Collections.sort(node_list, new compa2REVERSE());
 	}
 
+	/**
+	 * Detecteur de Cycle
+	 * @return so le graphe est un cycle
+	 */
 	public boolean isCycle() {
 		for (Node n : node_list) {
 			if (n.getNeighbors().size() != 2) {

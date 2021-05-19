@@ -32,7 +32,6 @@ public class Robustess_detector {
 				break;
 			}
 		}
-		// return isMISrobust;
 		if (isMISrobust) {
 			return true;
 		} else {
@@ -42,8 +41,7 @@ public class Robustess_detector {
 
 	public static boolean isLinked(Node node, ArrayList<Node> list) {
 		// cette methode permet de voir si il existe un cheminement d'arrete le
-		// menant
-		// jusqu'a tout les autres nodes
+		// menant jusqu'a tout les autres nodes
 		ArrayList<Node> voisin_a_voir = new ArrayList<Node>();
 		ArrayList<Node> voisin_vu = new ArrayList<Node>();
 		voisin_vu.add(node);
@@ -78,7 +76,6 @@ public class Robustess_detector {
 
 			ispresent = false;
 			for (Node node_vu : voisin_vu) {
-				// if(isIn(node_vu, g.getList()){ispresent = true;}
 				if (node_vu.getId() == node_graph.getId()) {
 					ispresent = true;
 				}
