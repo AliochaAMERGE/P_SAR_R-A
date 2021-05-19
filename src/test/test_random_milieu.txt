@@ -1,0 +1,17 @@
+# ! fichier tests
+# choix des graphes à tester { - Random (dense) - Sputnik - Bipartite (complet) - arbre - cycle - lecture d'un graphe}
+1 0 0 0 0
+# densité pour graph random
+0.3
+# taille des graphes : [start, end[
+5 25
+# nombre de tests pour une taille donnée
+1000
+# emplacement du début de la recherche : debut, milieu, fin
+milieu
+# nom du fichier de sauvegarde (vide si pas de sauvegarde)
+src/test_files/test_random_milieu.csv
+# sauvegarde des temps des méthodes : 1 ou 0
+0
+# choix du tri : { 0 - aucun tri - 1 - tri par nb voisin - 2 - tri par nb voisins dans le MIS - 3 -tri par nb voisin reverse - 4 - tri par nb voisins dans le MIS reverse }
+0
