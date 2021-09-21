@@ -11,6 +11,8 @@ Lien du projet : https://github.com/AliochaAMERGE/P_SAR_R-A.git
 
 Ce projet a été réalisé dans le cadre de l'UE PROJET SAR du master 1 Informatique mention SAR de *Sorbonne Université*.
 
+## Rapport incomplet à ce jour
+
 <div style="page-break-after: always;"></div>
 
 ## Table des matières 
